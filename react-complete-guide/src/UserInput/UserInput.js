@@ -1,20 +1,9 @@
-import React, { Component } from 'react';
-
-// class UserInput extends Component {
-//     render() {
-//         return (
-//             <input onChange={this.props.updateUsername} value={this.props.username}></input>
-//         )
-//     }
-// }
-
-// export default UserInput
-
+import React from 'react';
 
 function UserInput(props) {
     return (
         <div>
-            <input onChange={props.updateUsername} value={props.username}></input>
+            <input type="text" onChange={props.change} value={props.input} />
         </div>
     )
 }

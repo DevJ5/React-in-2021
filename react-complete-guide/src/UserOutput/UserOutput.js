@@ -4,8 +4,7 @@ export class UserOutput extends Component {
     render() {
         return (
             <div>
-                <p>{this.props.username}</p>
-                <p>Ernie</p>
+                <p>{this.props.length}</p>
             </div>
         )
     }
