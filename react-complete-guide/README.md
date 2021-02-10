@@ -47,5 +47,19 @@ Pass props and inner content:
 ## Styling
 - Radium, npm install --save radium, use <StyleRoot> wrapper for media queries and use Radium as HOC
 - styled-components, npm install --save styled-components
-- CSS modules, use nmp eject to edit webpack config. Then add modules: true, localIdentName: '[name]__[local]__[hash:base64:5]' to the css-loader options.
+- CSS modules, use nmp run eject to edit webpack config. Then add modules: true, localIdentName: '[name]__[local]__[hash:base64:5]' to the css-loader options.
+- in react scripts version 2, you have to name the css file: Person.module.css and then import. No need to eject anything and modify webpack.
 
+## Errors
+- Wrap components with error boundaries
+
+## Lifecycle
+- In functional components use the useEffect hook for lifecycle hooks
+- useEffect with empty array as second arguments simulates componentDidMount
+- use props in the array if you want componentDidUpdate to run on certain props
+- useEffect can also take a return statement that returns an anoymous function, this simulates componentDidUnmount
+
+## Optimization
+- use shouldComponentUpdate in class based component
+- use React.memo as a HOC around a function component
+- use a PureComponent if all of the props need to be checked for changes
