@@ -4,7 +4,7 @@ import classes from './Backdrop.css';
 
 const backdrop = (props) => {
     return (
-        props.isModalOpen ? <div className={classes.Backdrop} onClick={props.updateModalStatus}></div> : null
+        props.isShown ? <div className={classes.Backdrop} onClick={props.clicked}></div> : null
     )
 }
 
