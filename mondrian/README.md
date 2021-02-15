@@ -1,0 +1,14 @@
+- Install prettier
+  - In VSCode settings, set 'Set Editor: Default Formatter' to esbenp.prettier-vscode
+  - There are 2 options to set prettier settings:
+    - VSCode settings "prettier.singleQuote": true
+    - .prettierrc "singleQuote": true
+- Install ESLint
+  - Install the following dev dependencies for a project with `npm install -D eslint prettier eslint-plugin-prettier eslint-config-prettier eslint-plugin-node eslint-config-node`
+  - From npmjs.com grab the airbnb config style with `npx install-peerdeps --dev eslint-config-airbnb`
+  - Install eslint globally with `npm install -g eslint`
+  - Generate a .eslint.json with `eslint --init`
+    - Extends can extend the configs that are installed
+    - Plugins can plugin the installed plugins
+    - Rules can set errors/warnings/off, for example "no-unused-vars":"warn"
+    - For Prettier errors set a rule "prettier/prettier":"error"
