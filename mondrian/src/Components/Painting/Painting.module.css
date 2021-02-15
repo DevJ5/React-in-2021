@@ -1,0 +1,14 @@
+.Painting {
+  width: 300px;
+  margin: 50px auto;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid black;
+}
+
+.Square {
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+  box-sizing: border-box;
+}
