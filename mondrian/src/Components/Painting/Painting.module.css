@@ -1,9 +1,11 @@
 .Painting {
-  width: 300px;
+  width: 317px;
+  height: 600px;
   margin: 50px auto;
   display: flex;
+  align-content: baseline;
   flex-wrap: wrap;
-  border: 1px solid black;
+  overflow: auto;
 }
 
 .Square {

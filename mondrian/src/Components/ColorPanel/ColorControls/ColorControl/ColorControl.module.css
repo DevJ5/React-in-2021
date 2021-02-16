@@ -1,0 +1,8 @@
+.ColorControl {
+  display: flex;
+  flex-direction: row;
+}
+
+.ColorControl > div {
+  width: 150px;
+}
