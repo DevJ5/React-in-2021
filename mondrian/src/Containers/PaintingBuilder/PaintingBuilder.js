@@ -14,6 +14,15 @@ export default class PaintingBuilder extends Component {
     squares: [],
   };
 
+  static getDerivedStateFromProps(props, state) {
+    console.log('App.js getDerivedStateFromProps runs', props);
+    return state;
+  }
+
+  componentDidMount() {
+    console.log('App.js componentDidMount runs.');
+  }
+
   addSquareHandler = (color) => {
     const squares = [...this.state.squares];
     squares.push(color);
