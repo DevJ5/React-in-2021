@@ -5,6 +5,8 @@
 }
 
 .NavigationItem a {
+  text-decoration: none;
+  color: white;
   display: block;
   height: 100%;
   padding: 21px 10px;
@@ -14,6 +16,7 @@
 .NavigationItem a:hover,
 .NavigationItem a:active,
 .NavigationItem a.active {
+  text-decoration: dashed;
   background-color: #2c2c2c;
   border-bottom: 4px solid #a1a1a1;
 }

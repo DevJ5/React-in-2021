@@ -6,8 +6,16 @@ const ColorControl = (props) => {
   return (
     <div className={styles.ColorControl}>
       <div>{props.label}</div>
-      <button onClick={() => props.removeSquare(props.color)}>Less</button>
-      <button onClick={() => props.addSquare(props.color)}>More</button>
+      <button
+        className={styles.Less}
+        onClick={() => props.removeSquare(props.color)}>
+        Less
+      </button>
+      <button
+        className={styles.More}
+        onClick={() => props.addSquare(props.color)}>
+        More
+      </button>
     </div>
   );
 };

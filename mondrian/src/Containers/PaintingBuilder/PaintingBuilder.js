@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import ColorPanel from '../../Components/ColorPanel/ColorPanel';
+import OrderSummary from '../../Components/ColorPanel/OrderSummary/OrderSummary';
 import Painting from '../../Components/Painting/Painting';
+import Modal from '../../Components/UI/Modal/Modal';
+
+const SQUARE_PRICES = {
+  yellow: 500,
+  green: 600,
+  blue: 400,
+  red: 400,
+  black: 100,
+};
 
 export default class PaintingBuilder extends Component {
   state = {
@@ -12,6 +22,8 @@ export default class PaintingBuilder extends Component {
       black: 0,
     },
     squares: [],
+    totalPrice: 0,
+    isModalOpen: false,
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -30,6 +42,8 @@ export default class PaintingBuilder extends Component {
     const amounts = { ...this.state.amounts };
     amounts[color] = amounts[color] + 1;
     this.setState({ amounts });
+    const newTotalPrice = this.state.totalPrice + SQUARE_PRICES[color];
+    this.setState({ totalPrice: newTotalPrice });
   };
 
   removeSquareHandler = (color) => {
@@ -41,7 +55,17 @@ export default class PaintingBuilder extends Component {
       const amounts = { ...this.state.amounts };
       amounts[color] = amounts[color] - 1;
       this.setState({ amounts });
+      const newTotalPrice = this.state.totalPrice - SQUARE_PRICES[color];
+      this.setState({ totalPrice: newTotalPrice });
     }
+  };
+
+  toggleModalHandler = () => {
+    this.setState((state) => {
+      return {
+        isModalOpen: !state.isModalOpen,
+      };
+    });
   };
 
   render() {
@@ -49,8 +73,15 @@ export default class PaintingBuilder extends Component {
       <main>
         <Painting squares={this.state.squares}></Painting>
         <ColorPanel
+          totalPrice={this.state.totalPrice}
           addSquare={this.addSquareHandler}
-          removeSquare={this.removeSquareHandler}></ColorPanel>
+          removeSquare={this.removeSquareHandler}
+          toggleModal={this.toggleModalHandler}></ColorPanel>
+        <Modal
+          isOpen={this.state.isModalOpen}
+          toggleModal={this.toggleModalHandler}>
+          <OrderSummary></OrderSummary>
+        </Modal>
       </main>
     );
   }

@@ -16,7 +16,7 @@ const Painting = (props) => {
 };
 
 Painting.propTypes = {
-  squares: PropTypes.object,
+  squares: PropTypes.array,
 };
 
 export default Painting;

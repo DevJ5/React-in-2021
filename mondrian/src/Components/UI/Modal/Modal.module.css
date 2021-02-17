@@ -1,0 +1,20 @@
+.Modal {
+  position: fixed;
+  height: 400px;
+  width: 450px;
+  background-color: white;
+  top: calc(50% - 200px);
+  left: calc(50% - 225px);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  z-index: 100;
+  padding: 0 20px;
+  border-radius: 5px;
+  opacity: 0;
+  transform: translateY(-100vh);
+  transition: all 0.3s ease-out;
+}
+
+.isOpen {
+  transform: translateY(0);
+  opacity: 1;
+}

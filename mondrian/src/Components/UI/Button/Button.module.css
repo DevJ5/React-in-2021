@@ -1,0 +1,22 @@
+Button {
+  text-transform: uppercase;
+  border: 1px solid black;
+  margin-right: 15px;
+  background: none;
+  padding: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.Button:hover,
+.Button:active {
+  background: #f3f3f3;
+}
+
+.Continue {
+  color: ;
+}
+
+.Cancel {
+  color: ;
+}
