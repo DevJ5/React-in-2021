@@ -1,6 +1,6 @@
 .Painting {
   width: 317px;
-  height: 600px;
+  height: 300px;
   margin: 50px auto;
   display: flex;
   align-content: baseline;
@@ -10,7 +10,14 @@
 
 .Square {
   border: 1px solid black;
-  width: 100px;
+  width: 33%;
   height: 100px;
   box-sizing: border-box;
+}
+
+@media (min-width: 500px) {
+  .Painting {
+    height: 400px;
+    width: 317px;
+  }
 }

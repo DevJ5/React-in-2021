@@ -1,0 +1,15 @@
+.Sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 70%;
+  height: 100vh;
+  transform: translateX(-100vw);
+  z-index: 200;
+  background: white;
+  transition: transform 0.3s ease-out;
+}
+
+.isOpen {
+  transform: translateX(0);
+}

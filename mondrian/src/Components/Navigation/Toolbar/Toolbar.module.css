@@ -1,11 +1,16 @@
 .Toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   background: #141414;
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 68px;
+  height: 56px;
   padding: 0 10px;
+  box-sizing: border-box;
 }
 
 .Logo {
@@ -18,8 +23,8 @@
   height: 100%;
 }
 
-@media (min-width: 500px) {
-  .Menu {
+@media (max-width: 499px) {
+  .isDesktopOnly {
     display: none;
   }
 }

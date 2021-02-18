@@ -1,14 +1,15 @@
 import './App.css';
 import React from 'react';
 
-import Toolbar from './Components/Navigation/Toolbar/Toolbar';
 import PaintingBuilder from './Containers/PaintingBuilder/PaintingBuilder';
+import Layout from './Components/Layout/Layout';
 
 function App() {
   return (
     <div className="App">
-      <Toolbar></Toolbar>
-      <PaintingBuilder></PaintingBuilder>
+      <Layout>
+        <PaintingBuilder></PaintingBuilder>
+      </Layout>
     </div>
   );
 }

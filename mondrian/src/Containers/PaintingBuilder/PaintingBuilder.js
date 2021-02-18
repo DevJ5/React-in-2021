@@ -68,6 +68,11 @@ export default class PaintingBuilder extends Component {
     });
   };
 
+  purchasePaintingHandler = () => {
+    alert('Painting purchased.');
+    this.toggleModalHandler();
+  };
+
   render() {
     return (
       <main>
@@ -80,7 +85,9 @@ export default class PaintingBuilder extends Component {
         <Modal
           isOpen={this.state.isModalOpen}
           toggleModal={this.toggleModalHandler}>
-          <OrderSummary></OrderSummary>
+          <OrderSummary
+            toggleModal={this.toggleModalHandler}
+            purchasePainting={this.purchasePaintingHandler}></OrderSummary>
         </Modal>
       </main>
     );

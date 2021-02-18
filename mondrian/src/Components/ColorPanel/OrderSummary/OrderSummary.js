@@ -1,8 +1,9 @@
 import React from 'react';
 import Aux from '../../../HOC/Auxiliary';
 import Button from '../../UI/Button/Button';
+import PropTypes from 'prop-types';
 
-const OrderSummary = () => {
+const OrderSummary = (props) => {
   return (
     <Aux>
       <h3>Your painting</h3>
@@ -14,11 +15,16 @@ const OrderSummary = () => {
       <p>Total price: 500</p>
       <p>Continue to checkout?</p>
       <div>
-        <Button>Cancel</Button>
-        <Button>Continue</Button>
+        <Button click={props.toggleModal}>Cancel</Button>
+        <Button click={props.purchasePainting}>Continue</Button>
       </div>
     </Aux>
   );
+};
+
+OrderSummary.propTypes = {
+  toggleModal: PropTypes.func.isRequired,
+  purchasePainting: PropTypes.func.isRequired,
 };
 
 export default OrderSummary;
