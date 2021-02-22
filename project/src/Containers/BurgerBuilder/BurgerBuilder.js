@@ -17,17 +17,26 @@ const INGREDIENT_PRICES = {
 
 class BurgerBuilder extends Component {
   state = {
-    ingredients: {
-      salad: 0,
-      bacon: 0,
-      cheese: 0,
-      meat: 0,
-    },
+    ingredients: null,
     totalPrice: 4,
     isOrderNowButtonDisabled: true,
     isModalOpen: false,
     loading: false,
+    error: false,
   };
+
+  componentDidMount() {
+    axios
+      .get(
+        'https://react-burger-7e198-default-rtdb.firebaseio.com/ingredients.jsons'
+      )
+      .then((res) => {
+        this.setState({ ingredients: res.data });
+      })
+      .catch((err) => {
+        this.setState({ error: true });
+      });
+  }
 
   addIngredientHandler = (type) => {
     const newAmount = this.state.ingredients[type] + 1;
@@ -111,17 +120,12 @@ class BurgerBuilder extends Component {
         purchaseContinue={this.purchaseContinueHandler}></OrderSummary>
     );
 
-    if (this.state.loading) {
+    if (!this.state.ingredients || this.state.loading) {
       orderSummary = <Spinner></Spinner>;
     }
 
-    return (
+    let burger = (
       <Aux>
-        <Modal
-          isModalOpen={this.state.isModalOpen}
-          updateModalStatus={this.updateModalStatus}>
-          {orderSummary}
-        </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildControls
           removeButtonsDisabled={removeButtonsDisabled}
@@ -131,6 +135,25 @@ class BurgerBuilder extends Component {
           totalPrice={this.state.totalPrice}
           updateModalStatus={this.updateModalStatus}
         />
+      </Aux>
+    );
+
+    if (!this.state.ingredients) {
+      if (this.state.error) {
+        burger = <p>An error has occured fetching data</p>;
+      } else {
+        burger = <Spinner></Spinner>;
+      }
+    }
+
+    return (
+      <Aux>
+        <Modal
+          isModalOpen={this.state.isModalOpen}
+          updateModalStatus={this.updateModalStatus}>
+          {orderSummary}
+        </Modal>
+        {burger}
       </Aux>
     );
   }
