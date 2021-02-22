@@ -16,6 +16,7 @@ class Board extends React.Component {
     this.state = {
       squares: Array(9).fill(null),
       currentPlayer: 'X',
+      winner: null,
     };
   }
 
@@ -29,22 +30,49 @@ class Board extends React.Component {
   }
 
   handleClickSquare = (value) => {
+    if (this.state.winner) return false;
     const squares = [...this.state.squares];
     squares[value] = this.state.currentPlayer;
-    this.setState((prevState) => {
-      return {
+    this.setState(
+      (prevState) => ({
         squares,
         currentPlayer: prevState.currentPlayer === 'X' ? 'O' : 'X',
-      };
-    });
+      }),
+      () => {
+        const winner = this.calculateWinner();
+        if (winner) this.setState({ winner });
+      }
+    );
   };
 
-  calculateWinner() {}
+  calculateWinner() {
+    const winningLines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+
+    for (let i = 0; i < winningLines.length; i++) {
+      const [a, b, c] = winningLines[i];
+      if (
+        this.state.squares[a] &&
+        this.state.squares[a] === this.state.squares[b] &&
+        this.state.squares[b] === this.state.squares[c]
+      ) {
+        return this.state.squares[a];
+      }
+    }
+    return null;
+  }
 
   render() {
-    const status = `Next player: ${
-      this.state.currentPlayer === 'X' ? 'X' : 'O'
-    }`;
+    let status = `Next player: ${this.state.currentPlayer === 'X' ? 'X' : 'O'}`;
+    if (this.state.winner) status = `Winner: ${this.state.winner}`;
 
     return (
       <div>
