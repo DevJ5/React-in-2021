@@ -2,19 +2,49 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class Square extends React.Component {
-  render() {
-    return <button className="square">{this.props.value}</button>;
-  }
-}
+const Square = (props) => {
+  return (
+    <button className="square" onClick={props.clickSquare}>
+      {props.value}
+    </button>
+  );
+};
 
 class Board extends React.Component {
-  renderSquare(i) {
-    return <Square value={i} />;
+  constructor(props) {
+    super(props);
+    this.state = {
+      squares: Array(9).fill(null),
+      currentPlayer: 'X',
+    };
   }
 
+  renderSquare(value) {
+    return (
+      <Square
+        value={this.state.squares[value]}
+        clickSquare={() => this.handleClickSquare(value)}
+      />
+    );
+  }
+
+  handleClickSquare = (value) => {
+    const squares = [...this.state.squares];
+    squares[value] = this.state.currentPlayer;
+    this.setState((prevState) => {
+      return {
+        squares,
+        currentPlayer: prevState.currentPlayer === 'X' ? 'O' : 'X',
+      };
+    });
+  };
+
+  calculateWinner() {}
+
   render() {
-    const status = 'Next player: X';
+    const status = `Next player: ${
+      this.state.currentPlayer === 'X' ? 'X' : 'O'
+    }`;
 
     return (
       <div>
