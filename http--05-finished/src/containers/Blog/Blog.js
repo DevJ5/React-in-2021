@@ -7,6 +7,7 @@ import NewPost from './NewPost/NewPost';
 
 class Blog extends Component {
   render() {
+    console.log('Blog render runs');
     return (
       <div className="Blog">
         <header>
@@ -14,7 +15,7 @@ class Blog extends Component {
             <ul>
               <li>
                 <NavLink
-                  to="/"
+                  to="/posts"
                   exact
                   activeClassName="my-active"
                   activeStyle={{ textDecoration: 'underline' }}>
@@ -36,9 +37,8 @@ class Blog extends Component {
         </header>
         {/* <Route path="/" exact render={() => <Posts></Posts>} /> */}
         <Switch>
-          <Route path="/" exact component={Posts} />
           <Route path="/new-post" component={NewPost} />
-          <Route path="/:id" exact component={FullPost} />
+          <Route path="/posts" component={Posts} />
         </Switch>
       </div>
     );
