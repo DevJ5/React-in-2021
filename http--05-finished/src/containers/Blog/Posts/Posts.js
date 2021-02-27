@@ -12,7 +12,6 @@ export class Posts extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
     axios
       .get('/posts')
       .then((response) => {
@@ -36,7 +35,6 @@ export class Posts extends Component {
   };
 
   render() {
-    console.log(this.props.match);
     let posts = <p style={{ textAlign: 'center' }}>Something went wrong!</p>;
     if (!this.state.error) {
       posts = this.state.posts.map((post) => {
@@ -52,6 +50,7 @@ export class Posts extends Component {
         );
       });
     }
+
     return (
       <div>
         <section className="Posts">{posts}</section>;
