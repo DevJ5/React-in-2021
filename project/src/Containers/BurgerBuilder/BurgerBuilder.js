@@ -28,10 +28,13 @@ class BurgerBuilder extends Component {
   componentDidMount() {
     axios
       .get(
-        'https://react-burger-7e198-default-rtdb.firebaseio.com/ingredients.jsons'
+        'https://react-burger-7e198-default-rtdb.firebaseio.com/ingredients.json'
       )
       .then((res) => {
-        this.setState({ ingredients: res.data });
+        this.setState(
+          { ingredients: res.data },
+          this.orderNowButtonStatusUpdate
+        );
       })
       .catch((err) => {
         this.setState({ error: true });
@@ -81,32 +84,44 @@ class BurgerBuilder extends Component {
   };
 
   purchaseContinueHandler = () => {
-    this.setState({ loading: true });
+    // this.setState({ loading: true });
 
-    const order = {
-      ingredients: this.state.ingredients,
-      totalPrice: this.state.totalPrice,
-      customer: {
-        name: 'Bert',
-        address: {
-          street: 'teststreet 1',
-          zipCode: '2342',
-          country: 'Holland',
-        },
-        email: 'test@mail.com',
-        deliveryMethod: 'fastest',
-      },
-    };
-    axios
-      .post('/orders.jsonss', order)
-      .then((res) => {
-        this.setState({ loading: false, isModalOpen: false });
-      })
-      .catch((err) => this.setState({ loading: false }));
+    // const order = {
+    //   ingredients: this.state.ingredients,
+    //   totalPrice: this.state.totalPrice,
+    //   customer: {
+    //     name: 'Bert',
+    //     address: {
+    //       street: 'teststreet 1',
+    //       zipCode: '2342',
+    //       country: 'Holland',
+    //     },
+    //     email: 'test@mail.com',
+    //     deliveryMethod: 'fastest',
+    //   },
+    // };
+    // axios
+    //   .post('/orders.jsons', order)
+    //   .then((res) => {
+    //     this.setState({ loading: false, isModalOpen: false });
+    //   })
+    //   .catch((err) => this.setState({ loading: false }));
+    const queryParams = [];
+    for (let ingredient in this.state.ingredients) {
+      queryParams.push(
+        `${encodeURIComponent(ingredient)}=${encodeURIComponent(
+          this.state.ingredients[ingredient]
+        )}`
+      );
+    }
+    const queryString = queryParams.join('&');
+    this.props.history.push({
+      pathname: '/checkout',
+      search: `?${queryString}`,
+    });
   };
 
   render() {
-    console.log('in render');
     const removeButtonsDisabled = { ...this.state.ingredients };
     for (const key in removeButtonsDisabled) {
       removeButtonsDisabled[key] = removeButtonsDisabled[key] <= 0;
