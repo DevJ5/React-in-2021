@@ -1,26 +1,28 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import CheckoutSummary from '../../Components/Burger/CheckoutSummary/CheckoutSummary';
+import CheckoutSummary from '../../Components/Order/CheckoutSummary/CheckoutSummary';
 import ContactData from './ContactData/ContactData';
 
 class Checkout extends Component {
-  state = {
-    ingredients: {
-      salad: 1,
-      cheese: 1,
-      meat: 1,
-      bacon: 1,
-    },
-  };
-
-  componentDidMount() {
+  // The old willMount is now the same as the contructor, basically it means before rendering any
+  // child components. didMount happens after rendering child components, thats why it doesnt work.
+  constructor(props) {
+    super(props);
     const query = new URLSearchParams(this.props.location.search);
     const ingredients = {};
+    let totalPrice;
     for (let param of query.entries()) {
       console.log(param);
-      ingredients[param[0]] = +param[1];
+      if (param[0] === 'price') {
+        totalPrice = param[1];
+      } else {
+        ingredients[param[0]] = +param[1];
+      }
     }
-    this.setState({ ingredients });
+    this.state = {
+      ingredients,
+      totalPrice,
+    };
   }
 
   checkoutCancelHandler = () => {
@@ -28,6 +30,7 @@ class Checkout extends Component {
   };
 
   checkoutContinueHandler = () => {
+    console.log(this.state.totalPrice);
     this.props.history.replace(this.props.match.url + '/contact-data');
   };
 
@@ -41,7 +44,13 @@ class Checkout extends Component {
           checkoutContinue={this.checkoutContinueHandler}></CheckoutSummary>
         <Route
           path={this.props.match.url + '/contact-data'}
-          component={ContactData}></Route>
+          render={() => (
+            <ContactData
+              ingredients={this.state.ingredients}
+              totalPrice={this.state.totalPrice}
+              {...this.props}
+            />
+          )}></Route>
       </div>
     );
   }
