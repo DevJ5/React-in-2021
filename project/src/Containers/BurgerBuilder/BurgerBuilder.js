@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { addIngredient } from '../../store/actions/actions';
+
 import BuildControls from '../../Components/Burger/BuildControls/BuildControls';
 import Burger from '../../Components/Burger/Burger';
 import OrderSummary from '../../Components/Burger/OrderSummary/OrderSummary';
@@ -8,7 +10,7 @@ import Aux from '../../HOC/Auxiliary';
 import axios from '../../axios-orders';
 import Spinner from '../../Components/UI/Spinner/Spinner';
 import withErrorHandler from '../../HOC/withErrorHandler';
-import * as actionTypes from '../../store/actions';
+import * as actionTypes from '../../store/actions/actions';
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -58,31 +60,18 @@ class BurgerBuilder extends Component {
     return sum <= 0;
   };
 
-  updateModalStatus = () => {
+  toggleModalStatus = () => {
     this.setState((state) => ({
       isModalOpen: !state.isModalOpen,
     }));
   };
 
   purchaseCancelHandler = () => {
-    this.updateModalStatus();
+    this.toggleModalStatus();
   };
 
   purchaseContinueHandler = () => {
-    const queryParams = [];
-    for (let ingredient in this.state.ingredients) {
-      queryParams.push(
-        `${encodeURIComponent(ingredient)}=${encodeURIComponent(
-          this.state.ingredients[ingredient]
-        )}`
-      );
-    }
-    queryParams.push(`price=${this.state.totalPrice}`);
-    const queryString = queryParams.join('&');
-    this.props.history.push({
-      pathname: '/checkout',
-      search: `?${queryString}`,
-    });
+    this.props.history.push('/checkout');
   };
 
   render() {
@@ -112,7 +101,7 @@ class BurgerBuilder extends Component {
           addIngredient={this.addIngredientHandler}
           removeIngredient={this.removeIngredientHandler}
           totalPrice={this.props.totalPrice}
-          updateModalStatus={this.updateModalStatus}
+          toggleModalStatus={this.toggleModalStatus}
         />
       </Aux>
     );
@@ -129,7 +118,7 @@ class BurgerBuilder extends Component {
       <Aux>
         <Modal
           isModalOpen={this.state.isModalOpen}
-          updateModalStatus={this.updateModalStatus}>
+          toggleModalStatus={this.toggleModalStatus}>
           {orderSummary}
         </Modal>
         {burger}
@@ -147,8 +136,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addIngredient: (ingredientType) =>
-      dispatch({ type: actionTypes.ADD_INGREDIENT, payload: ingredientType }),
+    addIngredient: (ingredientType) => dispatch(addIngredient(ingredientType)),
     removeIngredient: (ingredientType) =>
       dispatch({
         type: actionTypes.REMOVE_INGREDIENT,

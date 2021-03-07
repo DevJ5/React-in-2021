@@ -5,6 +5,8 @@ import axios from '../../../axios-orders';
 import Spinner from '../../../Components/UI/Spinner/Spinner';
 import Input from '../../../Components/UI/Input/Input';
 
+import { connect } from 'react-redux';
+
 const createOrderFormObject = (
   tag,
   elementConfig,
@@ -31,7 +33,7 @@ class ContactData extends Component {
         'input',
         { type: 'email', placeholder: 'Your email' },
         '',
-        { required: true },
+        { required: true, isEmail: true },
         false,
         false
       ),
@@ -47,7 +49,7 @@ class ContactData extends Component {
         'input',
         { type: 'text', placeholder: 'Your postalcode' },
         '',
-        { required: true, minLength: 4, maxLength: 6 },
+        { required: true, minLength: 4, maxLength: 6, isNumeric: true },
         false,
         false
       ),
@@ -114,6 +116,14 @@ class ContactData extends Component {
     if (validationRules.maxLength) {
       isValid = value.length <= validationRules.maxLength && isValid;
     }
+    if (validationRules.isEmail) {
+      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+      isValid = pattern.test(value) && isValid;
+    }
+    if (validationRules.isNumeric) {
+      const pattern = /^\d+$/;
+      isValid = pattern.test(value) && isValid;
+    }
     return isValid;
   }
 
@@ -130,6 +140,7 @@ class ContactData extends Component {
       e.target.value,
       updatedElement.validationRules
     );
+
     updatedElement.isTouched = true;
 
     updatedForm[id] = updatedElement;
@@ -142,42 +153,46 @@ class ContactData extends Component {
   };
 
   render() {
-    console.log(this.state);
     const formElements = [];
     for (let key in this.state.orderForm) {
       formElements.push({ ...this.state.orderForm[key], id: key });
     }
+
     let form = (
-      <React.Fragment>
-        <h4>Enter your contact data</h4>
-        <form action="">
-          {formElements.map((el) => {
-            return (
-              <Input
-                key={el.id}
-                tag={el.tag}
-                value={el.value}
-                elementConfig={el.elementConfig}
-                isValid={el.isValid}
-                shouldValidate={el.validationRules !== undefined}
-                isTouched={el.isTouched}
-                change={(e) => this.formDataChangeHandler(e, el.id)}
-              />
-            );
-          })}
-          <Button
-            btnType="Success"
-            clicked={this.orderHandler}
-            disabled={!this.state.isValidForm}>
-            ORDER
-          </Button>
-        </form>
-      </React.Fragment>
+      <form onSubmit={this.orderHandler}>
+        {formElements.map((el) => {
+          return (
+            <Input
+              key={el.id}
+              tag={el.tag}
+              value={el.value}
+              elementConfig={el.elementConfig}
+              isValid={el.isValid}
+              shouldValidate={el.validationRules !== undefined}
+              isTouched={el.isTouched}
+              change={(e) => this.formDataChangeHandler(e, el.id)}
+            />
+          );
+        })}
+        <Button btnType="Success" disabled={!this.state.isValidForm}>
+          ORDER
+        </Button>
+      </form>
     );
 
     if (this.state.loading) form = <Spinner></Spinner>;
-    return <div className={classes.ContactData}>{form}</div>;
+
+    return (
+      <div className={classes.ContactData}>
+        <h4>Enter your contact data</h4>
+        {form}
+      </div>
+    );
   }
 }
 
-export default ContactData;
+const mapStateToProps = (state) => {
+  return { ingredients: state.ingredients, totalPrice: state.totalPrice };
+};
+
+export default connect(mapStateToProps)(ContactData);
