@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import Button from '../../../Components/UI/Button/Button';
 import classes from './ContactData.css';
 import axios from '../../../axios-orders';
 import Spinner from '../../../Components/UI/Spinner/Spinner';
 import Input from '../../../Components/UI/Input/Input';
-
-import { connect } from 'react-redux';
+import withErrorHandler from '../../../HOC/withErrorHandler';
+import * as orderActions from '../../../store/actions/index';
 
 const createOrderFormObject = (
   tag,
@@ -75,13 +77,11 @@ class ContactData extends Component {
         false
       ),
     },
-    loading: false,
     isValidForm: false,
   };
 
   orderHandler = (e) => {
     e.preventDefault();
-    this.setState({ loading: true });
 
     const formData = {};
     for (let key in this.state.orderForm) {
@@ -94,13 +94,7 @@ class ContactData extends Component {
       customer: formData,
     };
 
-    axios
-      .post('/orders.json', order)
-      .then((res) => {
-        this.setState({ loading: false });
-        this.props.history.push('/');
-      })
-      .catch((err) => this.setState({ loading: false }));
+    this.props.purchaseBurger(order);
   };
 
   checkValidity(value, validationRules) {
@@ -180,7 +174,7 @@ class ContactData extends Component {
       </form>
     );
 
-    if (this.state.loading) form = <Spinner></Spinner>;
+    if (this.props.loading) form = <Spinner></Spinner>;
 
     return (
       <div className={classes.ContactData}>
@@ -192,7 +186,13 @@ class ContactData extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { ingredients: state.ingredients, totalPrice: state.totalPrice };
+  return {
+    ingredients: state.burgerBuilder.ingredients,
+    totalPrice: state.burgerBuilder.totalPrice,
+    loading: state.order.loading,
+  };
 };
 
-export default connect(mapStateToProps)(ContactData);
+export default connect(mapStateToProps, {
+  purchaseBurger: orderActions.purchaseBurger,
+})(withErrorHandler(ContactData, axios));
