@@ -10,4 +10,6 @@ export {
   purchaseBurgerSuccess,
   purchaseBurgerFailed,
   checkoutInit,
+  fetchOrders,
+  setOrders,
 } from './order';

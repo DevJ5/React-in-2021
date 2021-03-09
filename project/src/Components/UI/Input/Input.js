@@ -7,7 +7,8 @@ const Input = (props) => {
   if (props.isTouched && props.shouldValidate && !props.isValid) {
     inputClasses.push(classes.Invalid);
   }
-  switch (props.tag) {
+  console.log(props);
+  switch (props.elementType) {
     case 'input':
       inputElement = (
         <input
@@ -42,6 +43,16 @@ const Input = (props) => {
             );
           })}
         </select>
+      );
+      break;
+    case 'password':
+      inputElement = (
+        <input
+          className={inputClasses.join(' ')}
+          type={props.elementConfig.type}
+          value={props.value}
+          placeholder={props.elementConfig.placeholder}
+          onChange={props.change}></input>
       );
       break;
     default:

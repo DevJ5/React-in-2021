@@ -9,75 +9,92 @@ import Input from '../../../Components/UI/Input/Input';
 import withErrorHandler from '../../../HOC/withErrorHandler';
 import * as orderActions from '../../../store/actions/index';
 
-const createOrderFormObject = (
-  tag,
-  elementConfig,
-  value,
-  validationRules,
-  isValid,
-  isTouched
-) => {
-  return { tag, elementConfig, value, validationRules, isValid, isTouched };
-};
-
 class ContactData extends Component {
   state = {
     orderForm: {
-      name: createOrderFormObject(
-        'input',
-        { type: 'text', placeholder: 'Your name' },
-        '',
-        { required: true },
-        false,
-        false
-      ),
-      email: createOrderFormObject(
-        'input',
-        { type: 'email', placeholder: 'Your email' },
-        '',
-        { required: true, isEmail: true },
-        false,
-        false
-      ),
-      street: createOrderFormObject(
-        'input',
-        { type: 'text', placeholder: 'Your streetname' },
-        '',
-        { required: true },
-        false,
-        false
-      ),
-      postalCode: createOrderFormObject(
-        'input',
-        { type: 'text', placeholder: 'Your postalcode' },
-        '',
-        { required: true, minLength: 4, maxLength: 6, isNumeric: true },
-        false,
-        false
-      ),
-      country: createOrderFormObject(
-        'input',
-        { type: 'text', placeholder: 'Your country' },
-        '',
-        { required: true },
-        false,
-        false
-      ),
-      deliveryMethod: createOrderFormObject(
-        'select',
-        {
+      name: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Your Name',
+        },
+        value: '',
+        validationRules: {
+          required: true,
+        },
+        isValid: false,
+        touched: false,
+      },
+      street: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Street',
+        },
+        value: '',
+        validationRules: {
+          required: true,
+        },
+        isValid: false,
+        touched: false,
+      },
+      zipCode: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'ZIP Code',
+        },
+        value: '',
+        validationRules: {
+          required: true,
+          minLength: 5,
+          maxLength: 5,
+          isNumeric: true,
+        },
+        isValid: false,
+        touched: false,
+      },
+      country: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Country',
+        },
+        value: '',
+        validationRules: {
+          required: true,
+        },
+        isValid: false,
+        touched: false,
+      },
+      email: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'email',
+          placeholder: 'Your E-Mail',
+        },
+        value: '',
+        validationRules: {
+          required: true,
+          isEmail: true,
+        },
+        isValid: false,
+        touched: false,
+      },
+      deliveryMethod: {
+        elementType: 'select',
+        elementConfig: {
           options: [
-            { value: 'cheapest', displayName: 'Cheapest' },
-            { value: 'fastest', displayName: 'Fastest' },
+            { value: 'fastest', displayValue: 'Fastest' },
+            { value: 'cheapest', displayValue: 'Cheapest' },
           ],
         },
-        'cheapest',
-        {},
-        true,
-        false
-      ),
+        value: '',
+        validation: {},
+        isValid: true,
+      },
     },
-    isValidForm: false,
+    formIsValid: false,
   };
 
   orderHandler = (e) => {
@@ -158,7 +175,7 @@ class ContactData extends Component {
           return (
             <Input
               key={el.id}
-              tag={el.tag}
+              elementType={el.elementType}
               value={el.value}
               elementConfig={el.elementConfig}
               isValid={el.isValid}
