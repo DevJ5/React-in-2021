@@ -7,7 +7,6 @@ const Input = (props) => {
   if (props.isTouched && props.shouldValidate && !props.isValid) {
     inputClasses.push(classes.Invalid);
   }
-  console.log(props);
   switch (props.elementType) {
     case 'input':
       inputElement = (

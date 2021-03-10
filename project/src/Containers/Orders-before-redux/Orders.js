@@ -14,7 +14,6 @@ class Orders extends Component {
       .then((res) => {
         const orders = [];
         for (let key in res.data) {
-          console.log(res.data);
           orders.push({ ...res.data[key], id: key });
         }
         this.setState({ loading: false, orders });
@@ -25,7 +24,6 @@ class Orders extends Component {
   }
 
   render() {
-    console.log(this.state.orders);
     return (
       <div>
         {this.state.orders.map((order) => (
