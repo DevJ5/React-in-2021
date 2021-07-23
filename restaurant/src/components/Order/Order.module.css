@@ -1,0 +1,64 @@
+/* Order */
+.order {
+  width: 70%;
+  margin: 2rem auto 0;
+  background: var(--raw-umber);
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--navajo-white);
+  padding: 1rem 0;
+  color: white;
+}
+
+.order-item:last-child {
+  padding: 1rem 0 0;
+  border-bottom: none;
+}
+
+.order-item:first-child {
+  padding: 0 0 1rem;
+}
+
+.order-item__name {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.order-item__description {
+  font-style: italic;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.order-item__price {
+  font-size: 1.1rem;
+  color: var(--vegas-gold);
+  font-weight: bold;
+}
+
+.order-item__label {
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
+.order-item__input {
+  width: 3rem;
+}
+
+.order-item__btn {
+  display: block;
+  width: 80%;
+  margin-left: auto;
+  margin-top: 1rem;
+  background: var(--dark-sienna);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5rem;
+  color: white;
+  cursor: pointer;
+}
