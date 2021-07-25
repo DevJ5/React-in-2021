@@ -4,19 +4,28 @@ import Cart from './components/Cart/Cart';
 import Header from './components/Layout/Header';
 import Home from './components/Layout/Home';
 
-const App = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+interface IState {
+  isCartModalOpen: boolean;
+}
 
-  const toggleModalHandler = () => {
-    setIsModalOpen((prevState) => {
+const App: React.FC = () => {
+  const [isCartModalOpen, setIsCartModalOpen] =
+    useState<IState['isCartModalOpen']>(false);
+
+  const toggleCartModalHandler = (): void => {
+    setIsCartModalOpen((prevState: boolean): boolean => {
       return !prevState;
     });
   };
 
   return (
     <div className="app">
-      <Cart onToggleModal={toggleModalHandler} isModalOpen={isModalOpen}></Cart>
-      <Header onToggleModal={toggleModalHandler}></Header>
+      {isCartModalOpen && (
+        <Cart
+          onToggleCartModal={toggleCartModalHandler}
+          isCartModalOpen={isCartModalOpen}></Cart>
+      )}
+      <Header onToggleCartModal={toggleCartModalHandler}></Header>
       <Home></Home>
     </div>
   );

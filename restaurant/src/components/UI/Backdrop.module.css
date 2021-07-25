@@ -1,6 +1,7 @@
 .backdrop {
   background: rgba(0, 0, 0, 0.7);
-  filter: blur();
+  backdrop-filter: blur(2rem);
+  -moz-backdrop-filter: blur(2rem);
   height: 100%;
   width: 100%;
   position: fixed;

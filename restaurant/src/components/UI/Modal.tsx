@@ -1,39 +1,34 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import Backdrop from '../UI/Backdrop';
 import classes from './Modal.module.css';
+import { IModalProps } from '../Interfaces';
 
-const Modal = ({
+const Modal: React.FC<IModalProps> = ({
   children,
   onToggleModal,
   isModalOpen,
-}: {
-  children: any;
-  onToggleModal: any;
-  isModalOpen: any;
-}) => {
-  const overlayElement = document.querySelector('#overlays');
+}): JSX.Element => {
+  const overlayElement = document.querySelector('#overlays')!;
 
   return (
-    <Fragment>
-      {overlayElement &&
-        ReactDOM.createPortal(
-          <Backdrop
-            onToggleModal={onToggleModal}
-            isModalOpen={isModalOpen}></Backdrop>,
-          overlayElement
-        )}
-      {overlayElement &&
-        ReactDOM.createPortal(
-          <div
-            className={`${classes['modal']} ${
-              isModalOpen && classes['is-open']
-            }`}>
-            {children}
-          </div>,
-          overlayElement
-        )}
-    </Fragment>
+    <>
+      {ReactDOM.createPortal(
+        <Backdrop
+          onToggleModal={onToggleModal}
+          isModalOpen={isModalOpen}></Backdrop>,
+        overlayElement
+      )}
+      {ReactDOM.createPortal(
+        <div
+          className={`${classes['modal']} ${
+            isModalOpen && classes['is-open']
+          }`}>
+          {children}
+        </div>,
+        overlayElement
+      )}
+    </>
   );
 };
 
