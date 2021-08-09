@@ -1,16 +1,15 @@
-import { useContext } from 'react';
-
 import Modal from '../UI/Modal';
 import CartItem from './CartItem';
 import classes from './Cart.module.css';
-import CartContext, { CartItemInterface } from '../../store/cart-context';
+import { CartItemInterface } from '../../store/cart-context';
+import { useCartContext } from '../../store/cart-context';
 
 type CartProps = {
   onClose: () => void;
 };
 
 const Cart = (props: CartProps) => {
-  const cartCtx = useContext(CartContext);
+  const cartCtx = useCartContext();
 
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;

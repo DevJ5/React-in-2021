@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 interface CartContextInterface {
   items: CartItemInterface[];
@@ -15,5 +15,14 @@ export interface CartItemInterface {
 }
 
 const CartContext = React.createContext<CartContextInterface>(null!);
+
+// Custom hook to check whethere we're inside a provider
+export const useCartContext = () => {
+  const context = useContext(CartContext);
+
+  if (!context)
+    throw new Error('useCartContext must be used within CartContextProvider');
+  return context;
+};
 
 export default CartContext;
