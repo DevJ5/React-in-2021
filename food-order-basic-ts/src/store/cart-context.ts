@@ -5,6 +5,7 @@ interface CartContextInterface {
   totalAmount: number;
   addItem: (item: CartItemInterface) => void;
   removeItem: (id: CartItemInterface['id']) => void;
+  clearCart: () => void;
 }
 
 export interface CartItemInterface {
@@ -16,12 +17,13 @@ export interface CartItemInterface {
 
 const CartContext = React.createContext<CartContextInterface>(null!);
 
-// Custom hook to check whethere we're inside a provider
+// Custom hook to check whether we are inside a provider:
 export const useCartContext = () => {
   const context = useContext(CartContext);
 
   if (!context)
     throw new Error('useCartContext must be used within CartContextProvider');
+
   return context;
 };
 
