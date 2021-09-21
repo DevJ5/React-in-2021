@@ -1,0 +1,20 @@
+.flag-icons {
+  margin-left: 10px;
+}
+
+.flag-icons i {
+  cursor: pointer;
+}
+
+.flag-active {
+  outline: 2px solid #55c57a;
+  outline-offset: 4px;
+}
+
+.d-grid {
+  display: grid;
+  grid-template-rows: repeat(2, 50px);
+  grid-template-columns: repeat(2, 200px);
+  justify-items: start;
+  align-items: start;
+}

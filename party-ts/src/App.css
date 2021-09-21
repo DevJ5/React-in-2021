@@ -1,0 +1,115 @@
+/* Global */
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+  line-height: 1.6;
+  max-width: 120rem;
+  width: 50%;
+  margin: 2rem auto;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* People */
+
+.people__list {
+  margin-top: 5rem;
+  display: grid;
+  grid-row-gap: 2rem;
+}
+
+.people__list-item {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  grid-column-gap: 4rem;
+  border: 1px solid grey;
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+}
+
+.people__person {
+  display: flex;
+  align-items: center;
+  width: 25rem;
+}
+
+.people__name {
+  font-size: 1.7rem;
+  font-weight: bold;
+}
+
+.people__img {
+  margin-right: 2rem;
+  width: 7rem;
+  height: 7rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Person Form */
+.person-form-wrapper {
+  width: 50%;
+  max-width: 70rem;
+  margin: 5rem auto 0;
+}
+
+.person-form > * {
+  width: 100%;
+  padding: 0.6rem;
+  border: none;
+  border-bottom: 1px solid grey;
+  outline: none;
+  transition: 0.3s all;
+  background: rgba(236, 228, 228, 0.3);
+  border-radius: 3px 3px 0 0;
+}
+
+.person-form > *:focus,
+.person-form > *:active {
+  border-bottom: 1px solid blue;
+}
+
+.person-form > *:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.person-form > *::placeholder {
+  font-size: 1rem;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.person-form__btn {
+  border: none;
+  background-color: green;
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.person-form__btn:hover {
+  background-color: rgba(0, 129, 0, 0.8);
+}
