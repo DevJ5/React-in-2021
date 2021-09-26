@@ -10,6 +10,7 @@ const inputStateReducer = (state, action) => {
     return { isTouched: state.isTouched, value: action.value };
   }
   if (action.type === 'BLUR') {
+    console.log(state);
     return { isTouched: true, value: state.value };
   }
   if (action.type === 'RESET') {
@@ -24,7 +25,15 @@ const useInput = (validateValue) => {
     initialInputState
   );
 
-  const valueIsValid = validateValue(inputState.value);
+  let errorText;
+  let valueIsValid = validateValue.every((validateObj) => {
+    if (!validateObj.fn(inputState.value)) {
+      errorText = validateObj.errorText;
+      return false;
+    }
+    return true;
+  });
+
   const hasError = !valueIsValid && inputState.isTouched;
 
   const valueChangeHandler = (event) => {
@@ -32,6 +41,7 @@ const useInput = (validateValue) => {
   };
 
   const inputBlurHandler = (event) => {
+    console.log('inputBlurHandler runs');
     dispatch({ type: 'BLUR' });
   };
 
@@ -43,6 +53,7 @@ const useInput = (validateValue) => {
     value: inputState.value,
     isValid: valueIsValid,
     hasError,
+    errorText,
     valueChangeHandler,
     inputBlurHandler,
     reset,
