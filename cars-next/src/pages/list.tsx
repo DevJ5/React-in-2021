@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Owner } from './api/Owner';
+import { Owner } from '../types/api';
 
 export interface ListProps {
   owners: Owner[] | undefined;

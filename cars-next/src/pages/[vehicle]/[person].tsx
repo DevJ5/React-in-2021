@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { NextPageContext } from 'next';
 
 // types
-import { Owner } from '../api/Owner';
+import { Owner } from '../../types/api';
 
 export interface PersonProps {
   initialOwners: Owner[] | undefined;
@@ -13,8 +13,6 @@ const Person = ({ initialOwners }: PersonProps) => {
   const [owners, setOwners] = useState(initialOwners);
   const router = useRouter();
   const { person: personQuery, vehicle: vehicleQuery } = router.query;
-
-  // console.log(router);
 
   useEffect(() => {
     const sendRequest = async () => {
