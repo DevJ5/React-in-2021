@@ -1,4 +1,4 @@
-import { useRef, useContext } from 'react';
+import React, { useRef, useContext } from 'react';
 
 import { TodosContext } from '../store/todos-context';
 import classes from './NewTodo.module.css';
@@ -23,8 +23,8 @@ const NewTodo: React.FC = () => {
 
   return (
     <form onSubmit={submitHandler} className={classes.form}>
-      <label htmlFor='text'>Todo text</label>
-      <input type='text' id='text' ref={todoTextInputRef} />
+      <label htmlFor="text">Todo text</label>
+      <input type="text" id="text" ref={todoTextInputRef} />
       <button>Add Todo</button>
     </form>
   );
