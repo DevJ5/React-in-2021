@@ -6,7 +6,11 @@ interface ChildProps {
   children: ReactNode | ReactNode[];
 }
 
-export const Child = ({ color, onClick, children }: ChildProps) => {
+export const Child = ({
+  color,
+  onClick,
+  children,
+}: ChildProps): ReactElement => {
   return (
     <div>
       {color}

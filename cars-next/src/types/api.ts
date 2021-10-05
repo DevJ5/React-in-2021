@@ -3,3 +3,10 @@ export interface Owner {
   ownerName: string;
   details: string;
 }
+
+export interface Vehicle {
+  id: number;
+  brand: string;
+  model: string;
+  ownerId: number;
+}
