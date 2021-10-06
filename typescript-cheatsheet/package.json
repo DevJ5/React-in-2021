@@ -5,9 +5,10 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc -w",
-    "dev": "yarn concurrently -k -n COMPILER,NODEMON -c yellow,blue \"tsc -w\" \"nodemon -q dist -w\""
+    "dev": "yarn concurrently -k -n COMPILER,NODEMON -c yellow,blue \"tsc -w\" \"nodemon -q dist/basics.js -w\""
   },
   "devDependencies": {
+    "@types/node": "^16.10.3",
     "concurrently": "^6.3.0",
     "nodemon": "^2.0.13",
     "typescript": "^4.4.3"
