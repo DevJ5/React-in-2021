@@ -25,8 +25,6 @@ var helloWorld = "\n  " + hello + "\n  " + world + "\n";
 // Null and Undefined
 var n = null;
 var u = undefined;
-//let someNumber: number = null;
-var someNumber = 0;
 function uppercaseFirstLetter(str) {
     if (str) {
         return str[0].toUpperCase() + str.substr(1);

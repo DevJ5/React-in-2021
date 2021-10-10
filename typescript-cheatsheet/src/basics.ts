@@ -16,9 +16,6 @@ const helloWorld = `
 let n: null = null;
 let u: undefined = undefined;
 
-//let someNumber: number = null;
-let someNumber: number = 0;
-
 function uppercaseFirstLetter(str: string | null) {
   if (str) {
     return str[0].toUpperCase() + str.substr(1);
