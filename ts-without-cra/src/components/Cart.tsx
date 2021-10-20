@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import React, { createRef, useContext } from 'react';
 import { FiShoppingCart } from 'react-icons/fi';
 import CartCSS from './Cart.module.css';
 import { AppStateContext } from './AppState';
@@ -57,8 +57,7 @@ class Cart extends React.Component<Props, State> {
               <button
                 className={CartCSS.button}
                 type="button"
-                onClick={this.handleClick}
-              >
+                onClick={this.handleClick}>
                 <FiShoppingCart />
                 <span>{itemsCount} pizza(s)</span>
               </button>
@@ -66,8 +65,7 @@ class Cart extends React.Component<Props, State> {
                 className={CartCSS.cartDropDown}
                 style={{
                   display: this.state.isOpen ? 'block' : 'none',
-                }}
-              >
+                }}>
                 <ul>
                   {state.cart.items.map((item) => {
                     return (

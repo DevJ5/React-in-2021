@@ -24,8 +24,7 @@ const SpecialOffer: React.FC<Props> = ({ pizza }) => {
                   name: pizza.name,
                   price: pizza.price,
                 })
-              }
-            >
+              }>
               Add to Cart
             </button>
           );

@@ -29,6 +29,7 @@ export function withAddToCart<OriginalProps extends AddToCartProps>(
   return AddToCartHOC;
 }
 
+// Render props
 export const WithAddToCartProps: React.FC<{
   children: (props: AddToCartProps) => JSX.Element;
 }> = ({ children }) => {
